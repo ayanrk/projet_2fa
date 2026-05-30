@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vérification OTP – 2FA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ddb2e6, #cc6ec1);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .card {
+      background: white; border-radius: 16px;
+      padding: 40px; width: 380px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .icon-circle {
+      width: 70px; height: 70px;
+      background: linear-gradient(135deg, #4d2162, #772ec1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .icon-circle i { color: white; font-size: 28px; }
+
+    h1 { color: #300546; font-size: 22px; margin-bottom: 6px; }
+    .subtitle { color: #888; font-size: 13px; margin-bottom: 24px; }
+
+    .otp-display {
+      background: #edd8ff;
+      border: 2px dashed #5e167a;
+      border-radius: 12px;
+      padding: 16px; margin-bottom: 24px;
+    }
+
+    .otp-display p { font-size: 12px; color: #888; margin-bottom: 6px; }
+
+    .otp-code {
+      font-size: 36px; font-weight: 700;
+      color: #503165; letter-spacing: 8px;
+    }
+
+    .timer { font-size: 12px; color: #e74c3c; margin-top: 8px; }
+    .timer i { margin-right: 4px; }
+
+    label {
+      display: block; text-align: left;
+      font-size: 13px; color: #555;
+      margin-bottom: 6px; font-weight: 600;
+    }
+
+    .input-group { position: relative; margin-bottom: 18px; }
+
+    .input-group i {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%); color: #aaa; font-size: 15px;
+    }
+
+    input {
+      width: 100%; padding: 12px 14px 12px 40px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 20px; text-align: center;
+      letter-spacing: 6px; transition: border 0.2s;
+    }
+
+    input:focus { outline: none; border-color: #b73dc4; }
+
+    button {
+      width: 100%; padding: 13px;
+      background: linear-gradient(135deg, #4d2162, #772ec1);
+      color: white; border: none; border-radius: 8px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+
+    button:hover { opacity: 0.9; }
+
+    .error {
+      background: #fdecea; color: #c0392b;
+      padding: 10px 14px; border-radius: 8px;
+      font-size: 13px; margin-bottom: 16px;
+      border-left: 4px solid #c0392b;
+      display: flex; align-items: center; gap: 8px; text-align: left;
+    }
+
+    .back-link { margin-top: 16px; font-size: 13px; color: #888; }
+    .back-link a { color: #37044b; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon-circle">
+      <i class="fa-solid fa-mobile-screen-button"></i>
+    </div>
+    <h1>Vérification OTP</h1>
+    <p class="subtitle">Saisissez le code reçu par email</p>
+
+    <div class="otp-display">
+      <p><i class="fa-solid fa-envelope"></i> Code envoyé (simulation) :</p>
+      <div class="otp-code">{{ otp_code }}</div>
+      <div class="timer">
+        <i class="fa-solid fa-clock"></i> Valide 30 secondes
+      </div>
+    </div>
+
+    {% if error %}
+      <div class="error">
+        <i class="fa-solid fa-circle-xmark"></i> {{ error }}
+      </div>
+    {% endif %}
+
+    <form method="POST">
+      <label>Entrez votre code OTP</label>
+      <div class="input-group">
+        <i class="fa-solid fa-shield-halved"></i>
+        <input type="text" name="otp" maxlength="6"
+               placeholder="_ _ _ _ _ _" required autofocus>
+      </div>
+      <button type="submit">
+        <i class="fa-solid fa-circle-check"></i> Vérifier le code
+      </button>
+    </form>
+
+    <div class="back-link">
+      <a href="/login"><i class="fa-solid fa-arrow-left"></i> Retour à la connexion</a>
+    </div>
+  </div>
+</body>
+</html>

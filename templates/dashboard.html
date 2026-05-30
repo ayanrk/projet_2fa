@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tableau de bord – 2FA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .card {
+      background: white; border-radius: 16px;
+      padding: 50px 40px; width: 420px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .success-circle {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-circle i { color: white; font-size: 36px; }
+
+    h1 { color: #370f64; font-size: 24px; margin-bottom: 10px; }
+
+    .welcome { color: #555; font-size: 15px; margin-bottom: 30px; line-height: 1.6; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #EBF5FB; color: #1B4F72;
+      padding: 8px 20px; border-radius: 20px;
+      font-size: 13px; font-weight: 600; margin-bottom: 30px;
+    }
+
+    .info-box {
+      background: #f8f9fa; border-radius: 10px;
+      padding: 20px; margin-bottom: 30px; text-align: left;
+    }
+
+    .info-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: #555;
+      padding: 8px 0; border-bottom: 1px solid #eee;
+    }
+
+    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .info-row i { color: #27ae60; font-size: 15px; width: 20px; }
+
+    .logout-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 30px;
+      background: #e74c3c; color: white;
+      border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 14px; transition: opacity 0.2s;
+    }
+
+    .logout-btn:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="success-circle">
+      <i class="fa-solid fa-check"></i>
+    </div>
+    <h1>Accès Accordé !</h1>
+    <p class="welcome">
+      Bienvenue, <strong>{{ username }}</strong> !<br>
+      Votre identité a été vérifiée avec succès.
+    </p>
+
+    <div class="badge">
+      <i class="fa-solid fa-shield-halved"></i>
+      Authentification 2FA réussie
+    </div>
+
+    <div class="info-box">
+      <div class="info-row">
+        <i class="fa-solid fa-circle-check"></i>
+        Mot de passe vérifié (Phase 1)
+      </div>
+      <div class="info-row">
+        <i class="fa-solid fa-circle-check"></i>
+        Code OTP validé (Phase 2)
+      </div>
+      <div class="info-row">
+        <i class="fa-solid fa-circle-check"></i>
+        Session sécurisée établie
+      </div>
+    </div>
+
+    <a href="/logout" class="logout-btn">
+      <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+    </a>
+  </div>
+</body>
+</html>
